@@ -1,0 +1,121 @@
+<template name="CreateTeams">
+  <div class="content">
+
+    <div class="row">
+      <div class="col-lg-6">
+	<div class="box">
+	  <div class="box-header with-border">
+	    <h3 class="box-title">Companions List</h3><br/><br/>
+	  </div>
+	  <div class="box-body no-padding">
+	    <a class="btn bg-orange createTeam" type="button">Create Team</a>
+	    <table class="table table-bordered">
+	      <tbody>
+		<tr>
+		  <th>FirstName</th>
+		  <th>LastName</th>
+		  <!-- <th>Nationality</th> -->
+		  <th>Company</th>
+		  <!-- <th>Position</th> -->
+		  <!-- <th>Work Permit</th> -->
+		  <!-- <th>Expiration</th> -->
+		  <!-- <th>Vacation Start</th> -->
+		  <!-- <th>Vacation End</th> -->
+		  <th>Action</th>
+		</tr>
+		
+		{{#each companions}}
+		<tr>
+		  <td>{{firstName}}</td>
+		  <td>{{lastName}}</td>
+		  <!-- <td>{{nationality}}</td> -->
+		  <td>{{company}}</td>
+		  <!-- <td>{{position}}</td> -->
+		  <!-- <td>{{workPermit}}</td> -->
+		  <!-- <td>{{formatDate expirationDate}}</td> -->
+		  <!-- <td>{{formatDate vacationStart}}</td> -->
+		  <!-- <td>{{formatDate vacationEnd}}</td> -->
+		  <td>
+		    
+		    <a data-id-member="{{_id}}" data-firstName="{{firstName}}" data-lastName="{{lastName}}"
+		       data-index="{{@index}}" class="btn bg-orange addChief" type="button">Add as chief</a>
+		    <a data-id-member="{{_id}}" data-firstName="{{firstName}}" data-lastName="{{lastName}}"
+		       data-index="{{@index}}" class="btn bg-orange addMember" type="button">Add as members</a>
+		  </td>
+		</tr>
+		{{/each}}
+	      </tbody>
+	    </table>
+	  </div>
+	  
+	  <div class="box-footer clearfix">
+	    <div class="box-tools">
+	      <ul class="pagination pagination-sm no-margin pull-right">
+		<li id="prevCompanions"><a href="">Previous</a></li>		
+		<li><a id="nextCompanions" href="">Next</a></li>
+				<li>
+				  <select id="pageSelected" class="form-control">
+				    {{#each pagination}}
+
+				    {{#if this != 0}}
+				    <option value="{{this}}">{{this}}</option>
+				    {{/if}}
+				    {{/each}}
+				    
+				  </select> 
+				  
+				  
+				</li>
+				
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+
+
+
+
+
+      <div class="col-lg-6">
+	<div class="box">
+	  <div class="box-header with-border">
+	    <h3 class="box-title">Members of the Teams</h3><br/><br/>
+	  </div>
+	  <div class="box-body no-padding">
+	    <table class="table table-bordered">
+	      <tbody>
+		<tr>
+		  <th>FirstName</th>
+		  <th>LastName</th>
+		  <th>Action</th>
+		</tr>
+		{{#each teamMembersShow}}
+		<tr>
+		  <td>{{firstName}}</td>
+		  <td>{{lastName}}</td>
+		  <td>
+		    <a  data-id-member="{{_id}}" data-firstName="{{firstName}}" data-lastName="{{lastName}}"
+		       data-index="{{@index}}" class="btn bg-maroon removeMember" type="button">Remove</a>
+		  </td>
+		</tr>
+		{{/each}}
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </div>
+
+
+
+
+
+      
+    </div>
+
+    
+    
+  </div>
+
+</template>

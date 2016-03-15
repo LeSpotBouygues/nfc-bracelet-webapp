@@ -1,0 +1,90 @@
+<template name="UpdateCompanion">
+ 
+
+
+
+
+
+
+
+
+  <div class="content">
+    
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Update Companion</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" id="updateCompanion">
+	      {{#with companion}}
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" placeholder="firstName" value="{{firstName}}">
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName" value="{{lastName}}">
+                </div>
+		<div class="form-group">
+                  <label for="username">Nationality</label>
+                  <input type="text" class="form-control" id="nationality" name="nationality" placeholder="nationality" value="{{nationality}}">
+                </div>
+
+		<div class="form-group">
+                  <label for="company">Company</label>
+                  <input type="text" class="form-control" id="company" name="company" placeholder="company" value="{{company}}">
+		</div>
+
+		<div class="form-group">
+                  <label for="company">Position</label>
+                  <input type="text" class="form-control" id="position" name="position" placeholder="position" value="{{position}}">
+		</div>
+
+		<div class="form-group">
+                  <label for="workPermit">Work Permit</label>
+                  <input type="text" class="form-control" id="workPermit" name="workPermit" placeholder="workPermit" value="{{workPermit}}">
+		</div>
+
+		<div class="form-group">
+                  <label for="expirationDate">Expiration Date</label>
+                  <input type="date" class="form-control" id="expirationDate" name="expirationDate" placeholder="expirationDate" value="{{formatDate expirationDate}}">
+		</div>
+
+		<div class="form-group">
+                  <label for="vacationStart">Vacation Start</label>
+                  <input type="date" class="form-control" id="vacationStart" name="vacationStart" placeholder="vacationStart" value="{{formatDate vacationStart}}">
+		</div>
+		
+		<div class="form-group">
+                  <label for="vacationEnd">Vacation End</label>
+                  <input type="date" class="form-control" id="vacationEnd" name="vacationEnd" placeholder="vacationEnd" value="{{formatDate vacationEnd}}">
+		</div>
+		
+		
+                <!-- <div class="form-group"> -->
+                <!--   <label for="exampleInputPassword1">Password</label> -->
+                <!--   <input type="password" class="form-control" id="password" name="password" placeholder="Password"> -->
+                <!-- </div> -->
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+	      {{/with}}
+            </form>
+          </div>
+	</div>
+	</div>
+
+   
+  </div>
+</template>

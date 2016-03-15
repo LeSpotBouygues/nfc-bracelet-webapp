@@ -1,0 +1,85 @@
+<template name="Import">
+ 
+
+
+
+
+
+
+
+
+  <div class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Import Companions</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form role="form" id="importCompanions" enctype="multipart/form-data" method="POST"  target="_blank"
+		action="http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/importData">
+            <div class="box-body">
+	      <div class="form-group">
+                <label for="my_file">File input</label>
+                <input name="my_file" type="file" id="my_file">
+              </div>
+	    </div>
+            <!-- /.box-body -->
+	    
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>    
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Import Tasks</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form role="form" id="importTasks" enctype="multipart/form-data" method="POST"
+		target="_blank"
+		action="http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/tasks/importData">
+            <div class="box-body">
+	      <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" name="my_file" id="exampleInputFile">
+              </div>
+	    </div>
+            <!-- /.box-body -->
+	    
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>    
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    
+  </div>
+</template>

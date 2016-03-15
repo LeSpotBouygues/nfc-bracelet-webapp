@@ -1,0 +1,3 @@
+// Template.AdminPanel.onRendered(function (){
+
+// });
