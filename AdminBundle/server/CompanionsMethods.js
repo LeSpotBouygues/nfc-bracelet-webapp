@@ -10,6 +10,16 @@ Meteor.methods({
 	}
     },
 
+    CompanionsNoTeamListRequest: function() {
+	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/noTeam";
+	try {
+	    var res = HTTP.get(url, {});
+	    return JSON.parse(res.content);
+	} catch (e) {
+	    console.log(e);
+	    return null;
+	}
+    },
     
     CreateCompanionRequest: function(vIdPayrol, vIdBycn, vFirstName,
 				     vLastName, vNationality, vCompany, vPosition, vWorkPermit,
@@ -50,15 +60,17 @@ Meteor.methods({
 	}
     },
 
-    UpdateCompanionRequest: function(vFirstName, vLastName, vNationality,
+    UpdateCompanionRequest: function(vFirstName, vLastName, vAliasName, vNationality,
 				     vCompany, vPosition, vWorkPermit, vExpirationDate,
 				     vVacationStart, vVacationEnd, id) {
 	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/" + id;
+	console.log(vAliasName);
 	try {
 	    var res = HTTP.put(url, {
 		data: {
 		    firstName: vFirstName,
 		    lastName: vLastName,
+		    aliasName: vAliasName,
 		    nationality: vNationality,
 		    company: vCompany,
 		    position: vPosition,
@@ -73,5 +85,20 @@ Meteor.methods({
 	    console.log(e);
 	    return null;
 	}
+    },
+
+    AddNfcId: function(nfcIdV) {
+    	Nfc.insert({
+    	    nfcId: nfcIdV
+    	});
+	return true;
+    },
+
+    GetNfcId: function() {
+    	return Nfc.find({});
+    },
+
+    RemoveNfcId: function() {
+    	return Nfc.remove({});
     },
 });

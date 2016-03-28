@@ -30,12 +30,14 @@
                 <label for="idBYCN">Id BYCN</label>
                 <input type="text" class="form-control" id="idBYCN" name="idBYCN" placeholder="idBYCN">
               </div>
+	      {{#each nfcIds}}
 
-
+	      {{> nfcId}}
 	      <div class="form-group">
                 <label for="idNFC">Id NFC</label>
                 <input type="text" class="form-control" id="idNFC" name="idNFC" placeholder="NFC" value="{{nfcId}}">
               </div>
+	            {{/each}}
 
 	      
               <div class="form-group">

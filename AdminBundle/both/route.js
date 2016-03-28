@@ -1,4 +1,10 @@
-Router.onBeforeAction(function() {
+Router.onBeforeAction(function(req, res, next) {
+    var nfcUrl = "/admin/nfc";
+    var url = req.url;
+
+    if (url.indexOf(nfcUrl) > -1)
+    	this.next();
+    
     if (!Session.get('userToken')) {
 	BlazeLayout.render('Login');
     } else {
@@ -42,6 +48,7 @@ Router.route('/admin/companion/:id/update', function () {
 	    Session.set('companionId', res._id);
 	    Session.set('companionFirstName', res.firstName);
 	    Session.set('companionLastName', res.lastName);
+	    Session.set('companionAliasName', res.aliasName);
 	    Session.set('companionNationality', res.nationality);
  	    Session.set('companionCompany', res.company);
 	    Session.set('companionPosition', res.position);
@@ -54,6 +61,30 @@ Router.route('/admin/companion/:id/update', function () {
     
     BlazeLayout.render('AdminPanel', {main: 'UpdateCompanion'});
 });
+
+Router.route('/admin/addNfcId/:id', function () {
+
+    return "data fetch";
+});
+
+Router.route( "/admin/nfc/:id", function () {
+    var id    = this.params.id;
+
+    Meteor.call('RemoveNfcId');
+    
+    Meteor.call('AddNfcId', id, function(error, res) {
+    	if (!error && res) {
+	    console.log("success");	    
+    	}
+    });
+
+    this.response.statusCode = 200;
+    this.response.end("id read");
+}, { where: "server" });
+    // .get(function() {
+    // 	// If a GET request is made, return the user's profile.
+    // 	return "test";
+    // });
 
 Router.route('/admin/import', function () {
     BlazeLayout.render('AdminPanel', {main: 'Import'});

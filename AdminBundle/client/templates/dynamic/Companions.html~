@@ -61,7 +61,7 @@
 		<tr>
 		  <th>FirstName</th>
 		  <th>LastName</th>
-		  <th>Nickname</th>
+		  <th>Surname</th>
 		  <th>Nationality</th>
 		  <th>Company</th>
 		  <th>Position</th>

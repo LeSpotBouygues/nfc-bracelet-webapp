@@ -40,63 +40,7 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-    <div class="row">
-      <div class="col-lg-2">
-      </div>
-      <div class="col-lg-8">
-	<div class="box">
-	  <div class="box-header with-border">
-	    <h3 class="box-title">Export Data</h3><br/><br/>
-	  </div>
-	  <div class="box-body no-padding">
-	    <table class="table table-bordered">
-	      <tbody>
-		<tr>
-		  <th>Companion</th>
-		  <th>Date</th>
-		  <th>Task</th>
-		  <th>time</th>
-		</tr>
-		
-		{{#each histories}}
-		<tr>
-		  <td>{{firstName}} {{lastName}}</td>
-		  <td>{{formatDate date}}</td>
-		  <td>{{taskInProgress.code}} - {{taskInProgress.label_long}}</td>
-		  <td>{{duration}}</td>
-		</tr>
-		{{/each}}
-	      </tbody>
-	    </table>
-	  </div>
-	  
-	</div>
-      </div>
-    </div>
-    
-
-
-
-
-
-
-
-
-    
     
 
   </div>
-
-
-  
 </template>

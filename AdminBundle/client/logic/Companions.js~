@@ -23,23 +23,23 @@ Template.CreateCompanions.onRendered(function () {
     $('#expirationDate').datepicker();
     $('#vacationStart').datepicker();
     $('#vacationEnd').datepicker();
-    Meteor.call('RemoveNfcId');
+    Meteor.call("AddNfcId", "a12e45", function (err, res){
+    });
     
-    // Meteor.call("GetNfcId", function (err, res){
-    // 	if (!err && res) {
-    // 	    console.log(res);
-    // 	    return Session.set('nfcId', res);
-    // 	} else {
-    // 	    console.log(err);
-    // 	}
-    // });
+    Meteor.call("GetNfcId", function (err, res){
+    	if (!err && res) {
+	    console.log(res);
+    	    return Session.set('nfcId', res);
+    	} else {
+	    console.log(err);
+	}
+    });
 });
 
 Template.UpdateCompanion.onRendered(function () {
     $('#expirationDate').datepicker();
     $('#vacationStart').datepicker();
     $('#vacationEnd').datepicker();
-    Meteor.call('RemoveNfcId');
 });
 
 Template.UpdateCompanion.helpers({
@@ -51,7 +51,6 @@ Template.UpdateCompanion.helpers({
 	    id: Session.get("companionId"),
 	    firstName: Session.get("companionFirstName"),
 	    lastName: Session.get("companionLastName"),
-	    aliasName: Session.get("companionAliasName"),
 	    nationality: Session.get("companionNationality"),
 	    company: Session.get("companionCompany"),
 	    position: Session.get("companionPosition"),
@@ -124,18 +123,10 @@ Template.Companions.events({
 });
 
 Template.CreateCompanions.helpers({
-    nfcId: function () {
-	var ids = Nfc.find().fetch();
-	
-	return ids[0].nfcId;
-    },
-});
-
-Template.UpdateCompanion.helpers({
-    nfcId: function () {
-	var ids = Nfc.find().fetch();
-	
-	return ids[0].nfcId;
+    nfcIds: function () {
+	var ids = Nfc.find({});
+	console.log(ids);
+	return ids;
     },
 });
 
@@ -209,7 +200,6 @@ Template.UpdateCompanion.events({
 
 	if (event.target.firstName.value == '' ||
 	    event.target.lastName.value == '' ||
-	    event.target.aliasName.value == '' ||
 	    event.target.nationality.value == '' ||
 	    event.target.company.value == '' ||
 	    event.target.position.value == '' ||
@@ -224,7 +214,6 @@ Template.UpdateCompanion.events({
 
 	Meteor.call('UpdateCompanionRequest',
 		    event.target.firstName.value, event.target.lastName.value,
-		    event.target.aliasName.value,
 		    event.target.nationality.value, event.target.company.value,
 		    event.target.position.value, event.target.workPermit.value,
 		    event.target.expirationDate.value, event.target.vacationStart.value,

@@ -5,16 +5,8 @@ Template.Export.onRendered(function () {
     $('#dateEnd').datepicker({
 	format: "yyyy:mm:dd"
     });
-    Session.set('histories', null);
 });
 
-
-
-Template.Export.helpers({
-    histories: function () {
-	return Session.get('histories');
-    },
-});
 
 Template.Export.events({
     'submit #export': function(event) {
@@ -31,8 +23,6 @@ Template.Export.events({
 			    event.target.dateEnd.value = '';
 	    		    alert("Success: Exported files");
 			    console.log(res);
-			    console.log(res.histories[0][0]);
-			    Session.set('histories', res.histories[0]);
 			    var win = window.open(res.url, '_blank');
 			    window.focus();
 			    

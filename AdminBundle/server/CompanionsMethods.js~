@@ -50,17 +50,22 @@ Meteor.methods({
 	}
     },
 
-    UpdateCompanionRequest: function(vFirstName, vLastName, vUsername, vCompany, vPosition, id) {
+    UpdateCompanionRequest: function(vFirstName, vLastName, vNationality,
+				     vCompany, vPosition, vWorkPermit, vExpirationDate,
+				     vVacationStart, vVacationEnd, id) {
 	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/" + id;
 	try {
 	    var res = HTTP.put(url, {
 		data: {
-		    name: vFirstName + " " + vLastName,
 		    firstName: vFirstName,
 		    lastName: vLastName,
-		    username: vUsername,
+		    nationality: vNationality,
 		    company: vCompany,
-		    position: vPosition
+		    position: vPosition,
+		    workPermit: vWorkPermit,
+		    expirationDate: vExpirationDate,
+		    vacationStart: vVacationStart,
+		    vacationEnd: vVacationEnd
 		}
 	    });
 	    return JSON.parse(res.content);
@@ -68,5 +73,15 @@ Meteor.methods({
 	    console.log(e);
 	    return null;
 	}
+    },
+
+    AddNfcId: function(nfcIdV) {
+    	Nfc.insert({
+    	    nfcId: nfcIdV
+    	});
+    },
+
+    GetNfcId: function() {
+    	return Nfc.find({});
     },
 });

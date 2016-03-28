@@ -125,7 +125,7 @@
 		</tr>
 		{{#each teamTasksShow}}
 		<tr>
-		  <td>{{code}} - {{label_long}}</td>
+		  <td>{{label_long}}</td>
 		  <td>
 		    <a data-id-task="{{_id}}" data-index="{{@index}}"
 		       class="btn bg-maroon removeTask" type="button">Remove</a>
@@ -143,7 +143,7 @@
 		<select class="form-control" id="selectATask"
 			name="selectATask">
 		  {{#each tasksFull}}
-		  <option value="{{_id}},{{label_long}}">{{code}} - {{label_long}}</option>
+		  <option value="{{_id}},{{label_long}}">{{label_long}}</option>
 		  {{/each}}
 		</select>
 		
@@ -168,7 +168,7 @@
       <div class="col-lg-6">
 	<div class="box">
 	  <div class="box-header with-border">
-	    <h3 class="box-title">Workers's Tasks</h3><br/><br/>
+	    <h3 class="box-title">Tasks of the member</h3><br/><br/>
 	  </div>
 	  <div class="box-body no-padding">
 	    <table class="table table-bordered">
@@ -179,7 +179,7 @@
 		</tr>
 		{{#each teamTasksShow}}
 		<tr>
-		  <td>{{code}} - {{label_long}}</td>
+		  <td>{{label_long}}</td>
 		  <td>
 		    <a data-id-task="{{_id}}" data-index="{{@index}}"
 		       class="btn bg-maroon" type="button">Remove</a>
