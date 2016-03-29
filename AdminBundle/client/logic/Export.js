@@ -10,11 +10,11 @@ Template.Export.onRendered(function () {
 
 
 
-Template.Export.helpers({
-    histories: function () {
-	return Session.get('histories');
-    },
-});
+// Template.Export.helpers({
+//     histories: function () {
+// 	return Session.get('histories');
+//     },
+// });
 
 Template.Export.events({
     'submit #export': function(event) {
@@ -30,9 +30,7 @@ Template.Export.events({
 			    event.target.dateStart.value = '';
 			    event.target.dateEnd.value = '';
 	    		    alert("Success: Exported files");
-			    console.log(res);
-			    console.log(res.histories[0][0]);
-			    Session.set('histories', res.histories[0]);
+			    // Session.set('histories', res.histories[0]);
 			    var win = window.open(res.url, '_blank');
 			    window.focus();
 			    
