@@ -1,6 +1,6 @@
 Meteor.methods({
     CompanionsListRequest: function() {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions";
+	var url = urlApi + "/companions";
 	try {
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
@@ -11,7 +11,7 @@ Meteor.methods({
     },
 
     CompanionsNoTeamListRequest: function() {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/noTeam";
+	var url = urlApi + "/companions/noTeam";
 	try {
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
@@ -24,7 +24,7 @@ Meteor.methods({
     CreateCompanionRequest: function(vIdPayrol, vIdBycn, vFirstName,
 				     vLastName, vNationality, vCompany, vPosition, vWorkPermit,
 				     vExpirationDate, vVacationStart, vVacationEnd) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions";
+	var url = urlApi + "/companions";
 	try {
 	    var res = HTTP.post(url, {
 		data: {
@@ -50,7 +50,7 @@ Meteor.methods({
     },
 
     GetCompanionById: function(companionId) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/" + companionId;
+	var url = urlApi + "/companions/" + companionId;
 	try {
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
@@ -63,7 +63,7 @@ Meteor.methods({
     UpdateCompanionRequest: function(vFirstName, vLastName, vAliasName, vNationality,
 				     vCompany, vPosition, vWorkPermit, vExpirationDate,
 				     vVacationStart, vVacationEnd, id) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/" + id;
+	var url = urlApi + "/companions/" + id;
 	console.log(vAliasName);
 	try {
 	    var res = HTTP.put(url, {

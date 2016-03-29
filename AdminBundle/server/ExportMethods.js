@@ -1,6 +1,6 @@
 Meteor.methods({
     Export: function(vStart, vEnd) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/export";
+	var url = urlApi + "/export";
 	try {	    
 	    var res = HTTP.call('POST', url, {
 		data: {
@@ -16,7 +16,7 @@ Meteor.methods({
     },
 
     CompanionsImport: function(form) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/companions/importData";
+	var url = urlApi + "/companions/importData";
 	try {
 	    // console.log(file);
 	    var res = HTTP.post(url, {

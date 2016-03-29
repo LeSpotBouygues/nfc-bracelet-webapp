@@ -1,6 +1,6 @@
 Meteor.methods({
     TeamsListRequest: function() {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/teams";
+	var url = urlApi + "/teams";
 	try {
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
@@ -11,7 +11,7 @@ Meteor.methods({
     },
 
     TeamsRemoveCompanionRequest: function(idTeam, idCompanion) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/teams/" + idTeam + "/removeCompanion";
+	var url = urlApi + "/teams/" + idTeam + "/removeCompanion";
 	try {
 	    var res = HTTP.put(url, {
 		data: {
@@ -26,7 +26,7 @@ Meteor.methods({
     },
 
     TeamsAddCompanionRequest: function(idTeam, idCompanion) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/teams/" + idTeam + "/addCompanion";
+	var url = urlApi + "/teams/" + idTeam + "/addCompanion";
 	try {
 	    var res = HTTP.put(url, {
 		data: {
@@ -41,7 +41,7 @@ Meteor.methods({
     },
 
     TeamsDeleteTeamRequest: function(idTeam) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/teams/" + idTeam;
+	var url = urlApi + "/teams/" + idTeam;
 	try {
 	    var res = HTTP.del(url, {});
 	    return JSON.parse(res.content);
@@ -52,7 +52,7 @@ Meteor.methods({
     },
 
     TeamCreateRequest: function(chiefV, teamMembers) {
-	var url = "http://ec2-54-86-80-245.compute-1.amazonaws.com:3000/teams";
+	var url = urlApi + "/teams";
 	try {
 	    var res = HTTP.post(url, {
 		data: {
