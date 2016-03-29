@@ -110,8 +110,7 @@ Template.Companions.events({
 
 Template.CreateCompanions.helpers({
     nfcId: function () {
-	var ids = Nfc.find().fetch();
-	
+	var ids = Nfc.find().fetch();	
 	return ids[0].nfcId;
     },
 });

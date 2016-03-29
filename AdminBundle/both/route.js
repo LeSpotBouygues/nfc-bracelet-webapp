@@ -40,10 +40,12 @@ Router.route('/admin/companions', function () {
 });
 
 Router.route('/admin/companion/create', function () {
+    Meteor.call('RemoveNfcId');
     BlazeLayout.render('AdminPanel', {main: 'CreateCompanions'});
 });
 
 Router.route('/admin/companion/:id/update', function () {
+    Meteor.call('RemoveNfcId');
     Meteor.call('GetCompanionById', this.params.id.toString(), function(error, res) {	    
     	console.log(error);
     	if (!error && res) {

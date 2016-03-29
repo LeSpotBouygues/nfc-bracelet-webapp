@@ -28,4 +28,5 @@ natestrauser:select2
 momentjs:moment
 twbs:bootstrap
 rajit:bootstrap3-datepicker
+simple:reactive-method
 autopublish
