@@ -5,7 +5,6 @@ Meteor.methods({
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -20,7 +19,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -35,7 +33,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -46,7 +43,6 @@ Meteor.methods({
 	    var res = HTTP.del(url, {});
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -62,7 +58,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },

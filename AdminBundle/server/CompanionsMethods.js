@@ -5,7 +5,6 @@ Meteor.methods({
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -16,7 +15,6 @@ Meteor.methods({
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -39,12 +37,10 @@ Meteor.methods({
 		    expirationDate: vExpirationDate,
 		    vacationStart: vVacationStart,
 		    vacationEnd : vVacationEnd
-
 		}
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -55,7 +51,6 @@ Meteor.methods({
 	    var res = HTTP.get(url, {});
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },
@@ -64,7 +59,6 @@ Meteor.methods({
 				     vCompany, vPosition, vWorkPermit, vExpirationDate,
 				     vVacationStart, vVacationEnd, id) {
 	var url = urlApi + "/companions/" + id;
-	console.log(vAliasName);
 	try {
 	    var res = HTTP.put(url, {
 		data: {
@@ -82,7 +76,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return null;
 	}
     },

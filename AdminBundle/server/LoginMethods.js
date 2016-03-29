@@ -7,7 +7,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return false;
 	}
     }

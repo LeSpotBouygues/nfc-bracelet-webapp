@@ -10,7 +10,6 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return false;
 	}
     },
@@ -24,13 +23,10 @@ Meteor.methods({
 		    "contentType": false,
 		    "mimeType": "multipart/form-data",
 		},
-
-
 		data: form
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
-	    console.log(e);
 	    return false;
 	}
     }

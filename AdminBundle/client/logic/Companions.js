@@ -1,14 +1,12 @@
 
 
 Template.Companions.onRendered(function () {
-    Meteor.call('CompanionsListRequest', function(error, res) {	    
-    	console.log(res);
+    Meteor.call('CompanionsListRequest', function(error, res) {
     	if (!error && res) {
 	    Session.set('companionsCurrentPage', 1);
 	    Session.set('companionsPerPage', 10);
 	    Session.set('companionsNb', res.length);
-
-    	    return Session.set('companions', res);
+    	    Session.set('companions', res);
     	}	
     });
 
@@ -17,22 +15,11 @@ Template.Companions.onRendered(function () {
     });
 });
 
-
-
 Template.CreateCompanions.onRendered(function () {
     $('#expirationDate').datepicker();
     $('#vacationStart').datepicker();
     $('#vacationEnd').datepicker();
     Meteor.call('RemoveNfcId');
-    
-    // Meteor.call("GetNfcId", function (err, res){
-    // 	if (!err && res) {
-    // 	    console.log(res);
-    // 	    return Session.set('nfcId', res);
-    // 	} else {
-    // 	    console.log(err);
-    // 	}
-    // });
 });
 
 Template.UpdateCompanion.onRendered(function () {
@@ -45,7 +32,6 @@ Template.UpdateCompanion.onRendered(function () {
 Template.UpdateCompanion.helpers({
     companion: function() {
 	return {
-
 	    idPayrol: Session.get("companionIdPayrol"),
 	    idBycn: Session.get("companionIdBycn"),	    
 	    id: Session.get("companionId"),
@@ -63,7 +49,6 @@ Template.UpdateCompanion.helpers({
 	};
     }
 });
-
 
 Template.Companions.helpers({
     companions: function(page) {

@@ -1,6 +1,5 @@
 Template.Teams.onRendered(function () {
     Meteor.call('TeamsListRequest', function(error, res) {	    
-    	console.log(res);
     	if (!error && res) {
 	    Session.set('teamsCurrentPage', 1);
 	    Session.set('teamsPerPage', 5);
@@ -8,7 +7,7 @@ Template.Teams.onRendered(function () {
 	    Session.set('teamMembersShow', null);
 	    Session.set('teamTasksShow', null);
     	    Session.set('teams', res);
-
+	    
 	    Session.set('membersDisplay', false);
 	    Session.set('tasksDisplay', false);
 	    Session.set('tasksMemberDisplay', false);
@@ -21,10 +20,9 @@ Template.Teams.onRendered(function () {
     	}
     });
 
- 
     Meteor.call('TasksListRequest', function(error, res) {	    
     	if (!error && res) {
-    	    return Session.set('tasks', res);
+    	    Session.set('tasks', res);
     	}	
     });   
     
@@ -36,8 +34,6 @@ Template.Teams.onRendered(function () {
     $("selectATask").select2({
 	placeholder: "Select a task"
     });
-
-    
 });
 
 
@@ -47,17 +43,15 @@ Template.Teams.helpers({
 	var firstElem = Session.get('teamsPerPage') * (Session.get('teamsCurrentPage') - 1);
 	var lastElem = (Session.get('teamsPerPage') * (Session.get('teamsCurrentPage') - 1)) +
 	    Session.get('teamsPerPage');
-
+	
 	return comp.slice(firstElem, lastElem);
     },
     teamsFull: function(debut = 1, lim = 10) {
 	return Session.get('teams');
     },
-
     companionsFull: function() {
 	return Session.get('companions');
     },
-
     tasksFull: function() {
 	return Session.get('tasks');
     },
@@ -213,12 +207,11 @@ Template.Teams.events({
     "click .showtasks": function(event) {
 	Session.set('idTeam', $(event.target).data("id-team"));
 	Session.set('teamTasksShow', $(this)[0].tasks);
-	// console.log($(this)[0].tasks);
 	Session.set('membersDisplay', false);
 	Session.set('tasksDisplay', true);
 	Session.set('tasksMemberDisplay', false);
     },
-
+    
     "click .showtasksMember": function(event) {
 	Session.set('tasksMemberDisplay', true);
 	// var teamMember = Session.get('teamMembersShow');
@@ -490,6 +483,5 @@ Template.CreateTeams.events({
 		});
     	    }
 	});
-
     },
 });
