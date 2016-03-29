@@ -1,6 +1,3 @@
-accounts-base@1.2.2
-aldeed:autoform@5.8.1
-aldeed:simple-schema@1.1.0
 amplify@1.0.0
 autopublish@1.0.4
 autoupdate@1.2.4
@@ -16,7 +13,6 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 cfs:access-point@0.1.49
-cfs:autoform@2.2.1
 cfs:base-package@0.0.30
 cfs:collection@0.5.5
 cfs:collection-filters@0.2.4
@@ -36,7 +32,6 @@ check@1.1.0
 ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
-ddp-rate-limiter@1.0.0
 ddp-server@1.2.2
 deps@1.0.9
 diff-sequence@1.0.1
@@ -46,7 +41,6 @@ ejson@1.0.7
 es5-shim@4.1.14
 fastclick@1.0.7
 geojson-utils@1.0.4
-gwendall:auth-client-callbacks@0.1.0
 hot-code-push@1.0.0
 html-tools@1.0.5
 htmljs@1.0.5
@@ -60,13 +54,10 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
-jparker:crypto-core@0.1.0
-jparker:crypto-md5@0.1.1
 jquery@1.11.4
 kadira:blaze-layout@2.3.0
 launch-screen@1.0.4
 livedata@1.0.15
-localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
@@ -85,18 +76,14 @@ ordered-dict@1.0.4
 promise@0.5.1
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.5
-raix:ui-dropped-event@0.0.7
 rajit:bootstrap3-datepicker@1.5.1
 random@1.0.5
-rate-limit@1.0.0
 reactive-dict@1.1.3
 reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
-service-configuration@1.0.5
 session@1.1.1
-simple:reactive-method@1.0.2
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 standard-minifiers@1.0.2

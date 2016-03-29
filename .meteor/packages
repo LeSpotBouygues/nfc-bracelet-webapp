@@ -17,19 +17,13 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 http
-jparker:crypto-md5
 iron:router
 raix:handlebar-helpers
-simple:reactive-method
 reactive-var
 underscore
 kadira:blaze-layout
-aldeed:autoform
 cfs:standard-packages
-cfs:autoform
-gwendall:auth-client-callbacks
 u2622:persistent-session
-check
 natestrauser:select2
 momentjs:moment
 twbs:bootstrap
