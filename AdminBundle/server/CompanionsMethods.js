@@ -80,6 +80,36 @@ Meteor.methods({
 	}
     },
 
+    CompanionRemoveTaskRequest: function(idCompanion, idTask) {
+	var url = urlApi + "/companions/" + idCompanion + "/removeTask";
+	try {
+	    var res = HTTP.put(url, {
+		data: {
+		    task: idTask
+		}
+	    });
+	    return JSON.parse(res.content);
+	} catch (e) {
+	    console.log(e);
+	    return null;
+	}
+    },
+
+    CompanionAddTaskRequest: function(idCompanion, idTask) {
+	var url = urlApi + "/companions/" + idCompanion + "/addTask";
+	try {
+	    var res = HTTP.put(url, {
+		data: {
+		    task: idTask
+		}
+	    });
+	    return JSON.parse(res.content);
+	} catch (e) {
+	    return null;
+	}
+    },
+    
+    
     AddNfcId: function(nfcIdV) {
     	Nfc.insert({
     	    nfcId: nfcIdV

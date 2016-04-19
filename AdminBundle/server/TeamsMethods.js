@@ -33,6 +33,7 @@ Meteor.methods({
 	    });
 	    return JSON.parse(res.content);
 	} catch (e) {
+	    
 	    return null;
 	}
     },

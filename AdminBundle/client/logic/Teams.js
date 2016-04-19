@@ -13,7 +13,19 @@ Template.Teams.onRendered(function () {
 	    Session.set('tasksMemberDisplay', false);
     	}	
     });
+    
+    $("#selectACompanion").select2({
+    	placeholder: "Select a companion"
+    });
 
+    $("#selectATask").select2({
+	placeholder: "Select a task"
+    });
+
+     $("#selectATaskTeam").select2({
+	placeholder: "Select a task"
+    });
+    
     Meteor.call('CompanionsNoTeamListRequest', function(error, res) {
     	if (!error && res) {
     	    Session.set('companions', res);
@@ -25,15 +37,6 @@ Template.Teams.onRendered(function () {
     	    Session.set('tasks', res);
     	}	
     });   
-    
-
-    $("selectACompanion").select2({
-	placeholder: "Select a companion"
-    });
-
-    $("selectATask").select2({
-	placeholder: "Select a task"
-    });
 });
 
 
@@ -77,7 +80,11 @@ Template.Teams.helpers({
     },
 
     memberTasksShow: function() {
-	return Session.get('teamTasksShow');
+	return Session.get('memberTasksShow');
+    },
+
+    assignableTask: function() {
+	return Session.get('assignableTask');
     },
     
     pagination: function() {
@@ -211,22 +218,146 @@ Template.Teams.events({
 	Session.set('tasksDisplay', true);
 	Session.set('tasksMemberDisplay', false);
     },
-    
+
     "click .showtasksMember": function(event) {
 	Session.set('tasksMemberDisplay', true);
-	// var teamMember = Session.get('teamMembersShow');
-	// var idCompanion = $(event.target).data("id-companion");
-
+	var teamMember = Session.get('teamMembersShow');
+	var idCompanion = $(event.target).data("id-companion");
 	// console.log(teamMember[$(event.target).data("index")]);
 	// console.log(teamMember[$(event.target).data("index")].tasksInProgress);
-	// Session.set('idTeam', $(event.target).data("id-team"));
-	// Session.set('teamTasksShow', $(this)[0].tasks);
-	// console.log($(this)[0].tasks);
-	// Session.set('membersDisplay', false);
-	// Session.set('tasksDisplay', true);
+	console.log($(event.target).data("id-companion"));
+	Session.set('idCompanion', $(event.target).data("id-companion"));	
+
+	Session.set('memberTasksShow', teamMember[$(event.target).data("index")].tasksInProgress);
+
+        var assignableTask = Session.get('teamTasksShow');
+	var memberTask = Session.get('memberTasksShow');
+
+	console.log(assignableTask);
+	console.log(memberTask);
+
+	for (var i = 0; i < memberTask.length; i++)
+	{
+	    // console.log("i = " + i);
+            for (var j = 0; j < assignableTask.length; j++)
+	    {
+			    // console.log("j = " + j);
+		console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
+		if (memberTask[i]._id == assignableTask[j]._id)
+		{
+    		    assignableTask.splice(j, 1);
+		    break ;
+		}
+	    }
+	}
+	Session.set('assignableTask', assignableTask);
+    },
+
+    
+    "click .removetaskmember": function(event) {
+    	var index = $(event.target).data("index");
+    	var idTask = $(event.target).data("id-task");
+    		var teamMember = Session.get('teamMembersShow');
+    	var memberTasks = Session.get('memberTasksShow');
+
+
+
+    	Meteor.call('CompanionRemoveTaskRequest', Session.get('idCompanion'), idTask, function(error, res) {	    
+     	    if (!error && res) {
+    		console.log(memberTasks);
+    		memberTasks.splice(index, 1);
+    		console.log(memberTasks);
+    		Session.set('memberTasksShow', memberTasks);
+    		Session.set('tasksMemberDisplay', true);
+    	    } else {
+    		alert("Error : Something happened with the server");
+    	    }
+    	});
+    	Meteor.call('TeamsListRequest', function(error, res) {
+    	    if (!error && res) {
+    		Session.set('teams', res);
+
+		var assignableTask = Session.get('teamTasksShow');
+		var memberTask = Session.get('memberTasksShow');
+		
+		console.log(assignableTask);
+		console.log(memberTask);
+		
+		for (var i = 0; i < memberTask.length; i++)
+		{
+		    for (var j = 0; j < assignableTask.length; j++)
+		    {
+			console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
+			if (memberTask[i]._id ==  assignableTask[j]._id)
+			{
+    			    assignableTask.splice(j, 1);
+			    break ;
+			}
+		    }
+		}
+		Session.set('assignableTask', assignableTask);
+    	    }
+    	});
+    },
+
+
+    "submit #selectATaskTeamForm": function(event) {
+	event.preventDefault();
+	var result = event.target.selectATaskTeam.value;
+	console.log(result);
+	var tab = [];
+	tab = result.split(",");
+
+	console.log(tab);
+	
+	var idTask = tab[0];
+	
+	var task = {
+	    _id: idTask,
+	    label_long: tab[1]
+	}
+	
+	Meteor.call('CompanionAddTaskRequest', Session.get('idCompanion'), idTask, function(error, res) {	    
+     	    if (!error && res) {
+		var tasks = Session.get('memberTasksShow');
+		tasks.push(task);
+		Session.set('memberTasksShow', tasks);
+    	    } else {
+		alert("Error : Something happened with the server");
+	    }
+	});
+
+
+	Meteor.call('TeamsListRequest', function(error, res) {
+    	    if (!error && res) {
+    		Session.set('teams', res);
+
+
+		var assignableTask = Session.get('teamTasksShow');
+		var memberTask = Session.get('memberTasksShow');
+
+		console.log(assignableTask);
+		console.log(memberTask);
+
+		for (var i = 0; i < memberTask.length; i++)
+		{
+		    // console.log("i = " + i);
+		    for (var j = 0; j < assignableTask.length; j++)
+		    {
+			// console.log("j = " + j);
+			console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
+			if (memberTask[i]._id == assignableTask[j]._id)
+			{
+    			    assignableTask.splice(j, 1);
+			    break ;
+			}
+		    }
+		}
+		Session.set('assignableTask', assignableTask);
+    	    }
+	});
     },
     
-
     "submit #selectATaskForm": function(event) {
 	event.preventDefault();
 

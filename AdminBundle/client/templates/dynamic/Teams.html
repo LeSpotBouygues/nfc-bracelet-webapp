@@ -72,7 +72,7 @@
 		  <td>{{lastName}}</td>
 		  <td>
 
-		    <a data-id-team="{{_id}}" data-index="{{@index}}"
+		    <a data-id-companion="{{_id}}" data-index="{{@index}}"
 		       href="" class="btn bg-purple showtasksMember" type="button">Show Worker's Task</a>
 		    <a data-id-companion="{{_id}}" data-index="{{@index}}"
 		       class="btn bg-maroon removeCompanion" type="button">Remove</a>
@@ -177,17 +177,42 @@
 		  <th>label</th>
 		  <th>Action</th>
 		</tr>
-		{{#each teamTasksShow}}
+		{{#each memberTasksShow}}
 		<tr>
 		  <td>{{code}} - {{label_long}}</td>
 		  <td>
 		    <a data-id-task="{{_id}}" data-index="{{@index}}"
-		       class="btn bg-maroon" type="button">Remove</a>
+		       class="btn bg-maroon removetaskmember" type="button">Remove</a>
 		  </td>
 		</tr>
 		{{/each}}
 	      </tbody>
-	    </table>	    
+	    </table>
+
+
+          <form role="form" id="selectATaskTeamForm"
+		action="">
+            <div class="box-body addTask">
+	      <div class="form-group">
+                <label for="selectATask">select a task</label>
+		<select class="form-control" id="selectATaskTeam"
+			name="selectATaskTeam">
+		  {{#each assignableTask}}
+		  <option value="{{_id}},{{label_long}}">{{code}} - {{label_long}}</option>
+		  {{/each}}
+		</select>
+		
+		
+              </div>
+	    </div>
+            <!-- /.box-body -->
+	    
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Add task</button>
+            </div>    
+          </form>
+	   
+	  
 	  </div>
 	</div>
       </div>
