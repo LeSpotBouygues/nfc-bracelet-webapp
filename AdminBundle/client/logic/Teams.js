@@ -467,7 +467,8 @@ Template.Teams.events({
 	
 	var task = {
 	    _id: idTask,
-	    label_long: tab[1]
+	    label_long: tab[1],
+	    code: tab[2]
 	}
 	
 	Meteor.call('TaskAddRequest', Session.get('idTeam'), idTask, function(error, res) {	    
