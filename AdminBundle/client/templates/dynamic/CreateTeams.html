@@ -25,9 +25,9 @@
 		</tr>
 		
 		{{#each companions}}
-		<tr>
+		    <tr>
 		  <td>{{firstName}}</td>
-		  <td>{{lastName}}</td>
+		  <td>{{lastName}} {{chief}}</td>
 		  <!-- <td>{{nationality}}</td> -->
 		  <td>{{company}}</td>
 		  <!-- <td>{{position}}</td> -->
@@ -40,7 +40,7 @@
 		    <a data-id-member="{{_id}}" data-firstName="{{firstName}}" data-lastName="{{lastName}}"
 		       data-index="{{@index}}" class="btn bg-orange addChief" type="button">Add as foreman</a>
 		    <a data-id-member="{{_id}}" data-firstName="{{firstName}}" data-lastName="{{lastName}}"
-		       data-index="{{@index}}" class="btn bg-orange addMember" type="button">Add as worker</a>
+		       data-index="{{@index}}" class="btn bg-purple addMember" type="button">Add as worker</a>
 		  </td>
 		</tr>
 		{{/each}}

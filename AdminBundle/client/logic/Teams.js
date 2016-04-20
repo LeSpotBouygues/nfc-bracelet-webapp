@@ -86,6 +86,10 @@ Template.Teams.helpers({
     assignableTask: function() {
 	return Session.get('assignableTask');
     },
+
+    teamName: function() {
+	return Session.get('teamName');
+    },
     
     pagination: function() {
 	var i = 0;
@@ -125,6 +129,7 @@ Template.Teams.events({
     
     "click .showteam": function(event) {
 	Session.set('idTeam', $(event.target).data("id-team"));
+        Session.set('teamName', $(event.target).data("team-name"));
 	Session.set('teamMembersShow', $(this)[0].companions);
 	Session.set('teamTasksShow', $(this)[0].tasks);
 	Session.set('membersDisplay', true);
@@ -213,6 +218,7 @@ Template.Teams.events({
 
     "click .showtasks": function(event) {
 	Session.set('idTeam', $(event.target).data("id-team"));
+	Session.set('teamName', $(event.target).data("team-name"));
 	Session.set('teamTasksShow', $(this)[0].tasks);
 	Session.set('membersDisplay', false);
 	Session.set('tasksDisplay', true);
@@ -223,34 +229,40 @@ Template.Teams.events({
 	Session.set('tasksMemberDisplay', true);
 	var teamMember = Session.get('teamMembersShow');
 	var idCompanion = $(event.target).data("id-companion");
-	// console.log(teamMember[$(event.target).data("index")]);
-	// console.log(teamMember[$(event.target).data("index")].tasksInProgress);
+
 	console.log($(event.target).data("id-companion"));
 	Session.set('idCompanion', $(event.target).data("id-companion"));	
 
 	Session.set('memberTasksShow', teamMember[$(event.target).data("index")].tasksInProgress);
 
-        var assignableTask = Session.get('teamTasksShow');
-	var memberTask = Session.get('memberTasksShow');
+    	Meteor.call('TeamsListRequest', function(error, res) {
+    	    if (!error && res) {
+    		Session.set('teams', res);
+		var assignableTask = Session.get('teamTasksShow');
+		var memberTask = Session.get('memberTasksShow');
 
-	console.log(assignableTask);
-	console.log(memberTask);
-
-	for (var i = 0; i < memberTask.length; i++)
-	{
-	    // console.log("i = " + i);
-            for (var j = 0; j < assignableTask.length; j++)
-	    {
-			    // console.log("j = " + j);
-		console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
-		if (memberTask[i]._id == assignableTask[j]._id)
+		Session.set('assignableTask', null);
+		// for (var j = 0; j < assignableTask.length; j++) {
+		//     assignableTask[j]["none"] = "";
+		// }
+		for (var i = 0; i < memberTask.length; i++)
 		{
-    		    assignableTask.splice(j, 1);
-		    break ;
+		    for (var j = 0; j < assignableTask.length; j++)
+		    {
+			// console.log("j = " + j);
+			console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
+			if (memberTask[i]._id == assignableTask[j]._id)
+			{
+    			    // assignableTask[j]["none"] = "checked";
+			    assignableTask.splice(j, 1);
+			    break ;
+			}
+		    }
 		}
-	    }
-	}
-	Session.set('assignableTask', assignableTask);
+		Session.set('assignableTask', assignableTask);
+    	    }
+    	});
+	
     },
 
     
@@ -300,7 +312,89 @@ Template.Teams.events({
     	});
     },
 
+    // "click .addTaskMember": function(event){
+    // 	var idTask = $(event.target).data("idTask");
+    // 	console.log("id companin" + Session.get('idCompanion'));
+    // 	console.log("task " + $(event.target).data("id-task"));
+    // 	if ($(event.target).is(":checked") == true)
+    // 	{
+    // 	    Meteor.call('CompanionAddTaskRequest', Session.get('idCompanion'), idTask, function(error, res) {	    
+    //  		if (!error && res) {
+    // 		    alert("Success : Task added");
+    // 		    Meteor.call('TeamsListRequest', function(error, res) {
+    // 			if (!error && res) {
+    // 			    Session.set('teams', res);
+    // 			    var assignableTask = Session.get('teamTasksShow');
+    // 			    var memberTask = Session.get('memberTasksShow');
+			    
+    // 			    console.log(assignableTask);
+    // 			    console.log(memberTask);
+			    
+    // 			    Session.set('assignableTask', null);
+    // 		  	    for (var j = 0; j < assignableTask.length; j++) {
+    // 				assignableTask[j]["none"] = "";
+    // 			    }
+    // 			    for (var i = 0; i < memberTask.length; i++)
+    // 			    {
+    // 				for (var j = 0; j < assignableTask.length; j++)
+    // 				{
+    // 				    if (memberTask[i]._id == assignableTask[j]._id)
+    // 				    {
+    // 					assignableTask[j]["none"] = "checked";
+    // 					break ;
+    // 				    }
+    // 				}
+    // 			    }
+    // 			    Session.set('assignableTask', assignableTask);	
+    // 			}
+    // 		    });
+    // 		} else {
+    // 		    alert("Error : Something happened with the server");
+    // 		}
+    // 	    });
+    // 	}
+    // 	else
+    // 	{
+    // 	    Meteor.call('CompanionRemoveTaskRequest', Session.get('idCompanion'), idTask, function(error, res) {	    
+    //  		if (!error && res) {
+    // 		    alert("Success : Task removed");
+    // 		    Session.set('tasksMemberDisplay', true);
 
+    // 		    Meteor.call('TeamsListRequest', function(error, res) {
+    // 			if (!error && res) {
+    // 			    Session.set('teams', res);
+    // 			    var assignableTask = Session.get('teamTasksShow');
+    // 			    var memberTask = Session.get('memberTasksShow');
+
+    // 			    console.log(assignableTask);
+    // 			    console.log(memberTask);
+    // 			    Session.set('assignableTask', null);
+    // 			    for (var j = 0; j < assignableTask.length; j++) {
+    // 				assignableTask[j]["none"] = "";
+    // 			    }
+    // 			    for (var i = 0; i < memberTask.length; i++)
+    // 			    {
+    // 				for (var j = 0; j < assignableTask.length; j++)
+    // 				{
+    // 				    // console.log("j = " + j);
+    // 				    console.log(memberTask[i]._id + "et" + assignableTask[j]._id);
+    // 				    if (memberTask[i]._id == assignableTask[j]._id)
+    // 				    {
+    // 					assignableTask[j]["none"] = "checked";
+    // 					break ;
+    // 				    }
+    // 				}
+    // 			    }
+    // 			    Session.set('assignableTask', assignableTask);	
+    // 			}
+    // 		    });
+    // 		} else {
+    // 		    alert("Error : Something happened with the server");
+    // 		}
+    // 	    });
+    // 	}
+    // },
+    
     "submit #selectATaskTeamForm": function(event) {
 	event.preventDefault();
 	var result = event.target.selectATaskTeam.value;
@@ -314,7 +408,8 @@ Template.Teams.events({
 	
 	var task = {
 	    _id: idTask,
-	    label_long: tab[1]
+	    label_long: tab[1],
+	    code: tab[2]
 	}
 	
 	Meteor.call('CompanionAddTaskRequest', Session.get('idCompanion'), idTask, function(error, res) {	    

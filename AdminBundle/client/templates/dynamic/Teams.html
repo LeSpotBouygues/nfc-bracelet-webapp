@@ -21,10 +21,10 @@
 		  <td>{{chief.firstName}}</td>
 		  <td>{{chief.lastName}}</td>
 		  <td>
-		    <a data-id-team="{{_id}}" href="" class="btn bg-purple showteam" type="button">Show Team</a>
-		    <a data-id-team="{{_id}}" data-index="{{@index}}"
+		    <a data-id-team="{{_id}}" data-team-name="{{chief.firstName}} {{chief.lastName}}" href="" class="btn bg-purple showteam" type="button">Show Team</a>
+		    <a data-id-team="{{_id}}"  data-index="{{@index}}"
 		       class="btn bg-maroon deleteTeam" type="button">Delete Team</a>
-		    <a data-id-team="{{_id}}" href="" class="btn bg-purple showtasks" type="button">Show Team Tasks</a>
+		    <a data-id-team="{{_id}}" href="" data-team-name="{{chief.firstName}} {{chief.lastName}}" class="btn bg-purple showtasks" type="button">Show Team Tasks</a>
 		  </td>
 		</tr>
 		{{/each}}
@@ -56,7 +56,7 @@
       <div class="col-lg-6">
 	<div class="box">
 	  <div class="box-header with-border">
-	    <h3 class="box-title">Workers of the Teams</h3><br/><br/>
+	    <h3 class="box-title">Workers of the Team - {{teamName}}</h3><br/><br/>
 	  </div>
 	  <div class="box-body no-padding">
 	    <table class="table table-bordered">
@@ -114,7 +114,7 @@
       <div class="col-lg-6">
 	<div class="box">
 	  <div class="box-header with-border">
-	    <h3 class="box-title">Tasks of the Team</h3><br/><br/>
+	    <h3 class="box-title">Tasks of the Team - {{teamName}}</h3><br/><br/>
 	  </div>
 	  <div class="box-body no-padding">
 	    <table class="table table-bordered">
@@ -173,45 +173,73 @@
 	  <div class="box-body no-padding">
 	    <table class="table table-bordered">
 	      <tbody>
-		<tr>
-		  <th>label</th>
-		  <th>Action</th>
-		</tr>
-		{{#each memberTasksShow}}
-		<tr>
-		  <td>{{code}} - {{label_long}}</td>
-		  <td>
-		    <a data-id-task="{{_id}}" data-index="{{@index}}"
-		       class="btn bg-maroon removetaskmember" type="button">Remove</a>
-		  </td>
-		</tr>
-		{{/each}}
+	    	<tr>
+	    	  <th>label</th>
+	    	  <th>Action</th>
+	    	</tr>
+	    	{{#each memberTasksShow}}
+	    	<tr>
+	    	  <td>{{code}} - {{label_long}}</td>
+	    	  <td>
+	    	    <a data-id-task="{{_id}}" data-index="{{@index}}"
+	    	       class="btn bg-maroon removetaskmember" type="button">Remove</a>
+	    	  </td>
+	    	</tr>
+	    	{{/each}}
 	      </tbody>
 	    </table>
 
 
           <form role="form" id="selectATaskTeamForm"
-		action="">
+	  	action="">
             <div class="box-body addTask">
 	      <div class="form-group">
                 <label for="selectATask">select a task</label>
-		<select class="form-control" id="selectATaskTeam"
-			name="selectATaskTeam">
-		  {{#each assignableTask}}
-		  <option value="{{_id}},{{label_long}}">{{code}} - {{label_long}}</option>
-		  {{/each}}
-		</select>
+	  	<select class="form-control" id="selectATaskTeam"
+	  		name="selectATaskTeam">
+	  	  {{#each assignableTask}}
+	  	  <option value="{{_id}},{{label_long}},{{code}}">{{code}} - {{label_long}}</option>
+	  	  {{/each}}
+	  	</select>
 		
 		
               </div>
 	    </div>
-            <!-- /.box-body -->
 	    
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">Add task</button>
-            </div>    
+            </div>
           </form>
-	   
+
+
+
+<!-- 	    <table class="table table-bordered"> -->
+<!-- 	      <tbody> -->
+<!-- 		<tr> -->
+<!-- 		  <th>label</th> -->
+<!-- 		  <th>Action</th> -->
+<!-- 		</tr> -->
+<!-- 		{{#each assignableTask}} -->
+<!-- 		<tr> -->
+<!-- 		  <td>{{code}} - {{label_long}}</td> -->
+<!-- 		  <td> -->
+<!-- 		                    <div class="form-group"> -->
+<!--                   <div class="checkbox"> -->
+<!--                     <label> -->
+<!--                       <input class="addTaskMember" type="checkbox"  data-id-task="{{_id}}" {{none}}> -->
+<!--                     </label> -->
+<!--                   </div> -->
+<!-- </div> -->
+<!-- 		  </td> -->
+<!-- 		</tr> -->
+<!-- 		{{/each}} -->
+<!-- 	      </tbody> -->
+<!-- 	    </table> -->
+
+   
+
+
+	  
 	  
 	  </div>
 	</div>
