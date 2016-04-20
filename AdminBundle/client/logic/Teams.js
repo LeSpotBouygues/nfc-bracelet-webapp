@@ -605,6 +605,7 @@ Template.CreateTeams.events({
 	    _id: $(event.target).data("id-member"),
 	    firstName: $(event.target).data("firstname"),
 	    lastName: $(event.target).data("lastname"),
+	    colorForeman: "#FF851B",
 	    position: 1
 	};
 
