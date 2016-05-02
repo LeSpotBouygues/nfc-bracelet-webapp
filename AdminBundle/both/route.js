@@ -49,6 +49,7 @@ Router.route('/admin/companion/:id/update', function () {
     Meteor.call('GetCompanionById', this.params.id.toString(), function(error, res) {	    
     	console.log(error);
     	if (!error && res) {
+	    Session.set('companionIdBracelet', res.idBracelet);
 	    Session.set('companionId', res._id);
 	    Session.set('companionFirstName', res.firstName);
 	    Session.set('companionLastName', res.lastName);

@@ -27,8 +27,8 @@
               <div class="box-body">
 		
 		<div class="form-group">
-                  <label for="idNFC">Id NFC</label>
-                  <input type="text" class="form-control" id="idNFC" name="idNFC" placeholder="NFC" value="{{nfcId}}">
+                  <label for="idBracelet">Id NFC</label>
+                  <input type="text" class="form-control" id="idBracelet" name="idBracelet" placeholder="idBracelet" value="{{#if isIdBracelet}}{{idBracelet}}{{else}}{{nfcId}}{{/if}}">
 		</div>
 		
                 <div class="form-group">

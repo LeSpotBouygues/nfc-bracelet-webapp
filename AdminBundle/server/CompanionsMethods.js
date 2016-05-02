@@ -19,13 +19,14 @@ Meteor.methods({
 	}
     },
     
-    CreateCompanionRequest: function(vIdPayrol, vIdBycn, vFirstName,
+    CreateCompanionRequest: function(vIdBracelet, vIdPayrol, vIdBycn, vFirstName,
 				     vLastName, vNationality, vCompany, vPosition, vWorkPermit,
 				     vExpirationDate, vVacationStart, vVacationEnd) {
 	var url = urlApi + "/companions";
 	try {
 	    var res = HTTP.post(url, {
 		data: {
+		    idBracelet: vIdBracelet,
 		    idPayrol: vIdPayrol,
 		    idBycn: vIdBycn,
 		    firstName: vFirstName,
@@ -55,13 +56,14 @@ Meteor.methods({
 	}
     },
 
-    UpdateCompanionRequest: function(vFirstName, vLastName, vAliasName, vNationality,
+    UpdateCompanionRequest: function(vIdBracelet, vFirstName, vLastName, vAliasName, vNationality,
 				     vCompany, vPosition, vWorkPermit, vExpirationDate,
 				     vVacationStart, vVacationEnd, id) {
 	var url = urlApi + "/companions/" + id;
 	try {
 	    var res = HTTP.put(url, {
 		data: {
+		    idBracelet: vIdBracelet,
 		    firstName: vFirstName,
 		    lastName: vLastName,
 		    aliasName: vAliasName,

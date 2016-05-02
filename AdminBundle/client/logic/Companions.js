@@ -32,6 +32,7 @@ Template.UpdateCompanion.onRendered(function () {
 Template.UpdateCompanion.helpers({
     companion: function() {
 	return {
+	    idBracelet: Session.get("companionIdBracelet"),
 	    idPayrol: Session.get("companionIdPayrol"),
 	    idBycn: Session.get("companionIdBycn"),	    
 	    id: Session.get("companionId"),
@@ -47,6 +48,12 @@ Template.UpdateCompanion.helpers({
 	    vacationEnd: Session.get("companionVacationEnd"),
 
 	};
+    },
+    isIdBracelet: function() {
+	if (Session.get("companionIdBracelet"))
+	    return true;
+	else
+	    return false;
     }
 });
 
@@ -126,6 +133,7 @@ Template.CreateCompanions.events({
     'submit #createCompanion': function(event) {
 	event.preventDefault();
 	if (event.target.idPayrol.value == '' ||
+	    event.target.idBracelet.value == '' ||
 	    event.target.idBYCN.value == '' ||
 	    event.target.firstName.value == '' ||
 	    event.target.lastName.value == '' ||
@@ -145,7 +153,7 @@ Template.CreateCompanions.events({
 	console.log(event.target.nationality.value);
 	console.log(event.target.company.value);
 	console.log(event.target.position.value);
-	Meteor.call('CreateCompanionRequest',
+	Meteor.call('CreateCompanionRequest', event.target.idBracelet.value,
 		    event.target.idPayrol.value, event.target.idBYCN.value,
 		    event.target.firstName.value, event.target.lastName.value,
 		    event.target.nationality.value, event.target.company.value,
@@ -154,6 +162,7 @@ Template.CreateCompanions.events({
 		    event.target.vacationEnd.value,
 		    function(error, res) {
 			if (!error && res) {
+			    event.target.idBracelet.value = '';
 			    event.target.idPayrol.value = '';
 			    event.target.idBYCN.value = '';
 			    event.target.firstName.value = '';
@@ -191,6 +200,7 @@ Template.UpdateCompanion.events({
 	event.preventDefault();
 
 	if (event.target.firstName.value == '' ||
+	    event.target.idBracelet.value == '' ||
 	    event.target.lastName.value == '' ||
 	    event.target.aliasName.value == '' ||
 	    event.target.nationality.value == '' ||
@@ -205,7 +215,7 @@ Template.UpdateCompanion.events({
 	}	
 
 
-	Meteor.call('UpdateCompanionRequest',
+	Meteor.call('UpdateCompanionRequest', event.target.idBracelet.value,
 		    event.target.firstName.value, event.target.lastName.value,
 		    event.target.aliasName.value,
 		    event.target.nationality.value, event.target.company.value,
